@@ -4,10 +4,10 @@ import '@nomiclabs/hardhat-ethers';
 const config: HardhatUserConfig = {
   solidity: '0.8.17',
   paths: {
-    artifacts: './pages/api/artifacts',
-    sources: './pages/api/contracts',
-    cache: './pages/api/cache',
-    tests: './pages/api/test',
+    artifacts: './backend/artifacts',
+    sources: './backend/contracts',
+    cache: './backend/cache',
+    tests: './backend/test',
   },
 };
 

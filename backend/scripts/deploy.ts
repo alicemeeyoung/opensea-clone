@@ -1,4 +1,6 @@
 import path from 'path';
+import { artifacts, ethers } from 'hardhat';
+import type { Contract } from 'ethers';
 
 async function main() {
   const [deployer] = await ethers.getSigners();
@@ -6,15 +8,18 @@ async function main() {
   console.log('Deploying contracts with the account:', deployer.address);
   console.log('Account balance:', (await deployer.getBalance()).toString());
 
-  // deploy contracts here:
+  const NFT = await ethers.getContractFactory('NFT');
+  const nft = await NFT.deploy();
 
   // For each contract, pass the deployed contract and name to this function to save a copy of the contract ABI and address to the front end.
-  saveFrontendFiles();
+  saveFrontendFiles(nft, 'NFT');
 }
 
-function saveFrontendFiles(contract, name) {
+function saveFrontendFiles(contract: Contract, name: string) {
   const fs = require('fs');
-  const contractsDir = path.join(__dirname, '/../../frontend/contractsData');
+
+  // TODO: the path name may need to be updated
+  const contractsDir = path.join(__dirname, '/../../contracts-data');
 
   if (!fs.existsSync(contractsDir)) {
     fs.mkdirSync(contractsDir);
